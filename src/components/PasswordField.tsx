@@ -18,6 +18,34 @@ export default function PasswordField({ label, value, onChange }: Props) {
   const numberValid = /[0-9]/.test(value);
   const specialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(value);
 
+  const rules = [
+    {
+      isValid: lengthValid,
+      success: "Password is long enough",
+      error: "Must be at least 12 characters",
+    },
+    {
+      isValid: uppercaseValid,
+      success: "Contains uppercase letter",
+      error: "Must contain uppercase",
+    },
+    {
+      isValid: lowercaseValid,
+      success: "Contains lowercase letter",
+      error: "Must contain lowercase",
+    },
+    {
+      isValid: numberValid,
+      success: "Contains a number",
+      error: "Must contain a number",
+    },
+    {
+      isValid: specialCharValid,
+      success: "Contains a special character",
+      error: "Must contain a special character",
+    },
+  ];
+
   return (
     <div>
       <InputField
@@ -32,21 +60,14 @@ export default function PasswordField({ label, value, onChange }: Props) {
 
       {touched && (
         <div className="text-sm space-y-1">
-          <p className={lengthValid ? "text-green-500" : "text-red-500"}>
-            {lengthValid ? "Password is long enough" : "Must be at least 12 characters"}
-          </p>
-          <p className={uppercaseValid ? "text-green-500" : "text-red-500"}>
-            {uppercaseValid ? "Contains uppercase letter" : "Must contain uppercase"}
-          </p>
-          <p className={lowercaseValid ? "text-green-500" : "text-red-500"}>
-            {lowercaseValid ? "Contains lowercase letter" : "Must contain lowercase"}
-          </p>
-          <p className={numberValid ? "text-green-500" : "text-red-500"}>
-            {numberValid ? "Contains a number" : "Must contain a number"}
-          </p>
-          <p className={specialCharValid ? "text-green-500" : "text-red-500"}>
-            {specialCharValid ? "Contains a special character" : "Must contain a special character"}
-          </p>
+          {rules.map((rule, index) => (
+            <p
+              key={index}
+              className={rule.isValid ? "text-green-500" : "text-red-500"}
+            >
+              {rule.isValid ? rule.success : rule.error}
+            </p>
+          ))}
         </div>
       )}
     </div>
