@@ -1,6 +1,6 @@
 # LoginApp
-This login and registration application is built with Next.js, TypeScript, and Tailwind CSS. It includes live form validation and password strength feedback.  
-The project is a learning exercise to practice frontend development patterns in Next.js while laying the groundwork for future backend integration and security improvements.
+This login and registration application is built with Next.js, TypeScript, and Tailwind CSS. It includes live form validation, and password strength feedback.  
+The project is a learning exercise to practice frontend development patterns in Next.js while laying the groundwork for future backend integration and security improvements. It started with a basic implementation in src/app only. It is now refactored into a modular structure with reusable components.
 
 ## Features
 - Home page with navigation to login  
@@ -12,6 +12,7 @@ The project is a learning exercise to practice frontend development patterns in 
 - Registration success page with link to login  
 - Dashboard page
 - Consistent design with Tailwind CSS and gradient backgrounds  
+- Reusable components for input fields, password validation, layout, and navigation  
 
 ## Tech Stack
 - Next.js  
@@ -24,7 +25,6 @@ The project is a learning exercise to practice frontend development patterns in 
 - Enable session management  
 - Build logout functionality  
 - Show error messages for invalid credentials  
-- Make components more modular and reusable  
 - Add accessibility improvements
 
 ## Setup  
