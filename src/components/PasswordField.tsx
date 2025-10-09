@@ -46,6 +46,15 @@ export default function PasswordField({ label, value, onChange }: Props) {
     },
   ];
 
+  const metRules = rules.filter((rule) => rule.isValid).length;
+
+  let strengthLabel = "Weak";
+  if (metRules === 5) {
+    strengthLabel = "Strong";
+  } else if (metRules >= 3) {
+    strengthLabel = "Medium";
+  }
+
   return (
     <div>
       <InputField
@@ -59,16 +68,44 @@ export default function PasswordField({ label, value, onChange }: Props) {
       />
 
       {touched && (
-        <div className="text-sm space-y-1">
-          {rules.map((rule, index) => (
-            <p
-              key={index}
-              className={rule.isValid ? "text-green-500" : "text-red-500"}
+        <>
+          <div className="flex items-center justify-between mb-2">
+            <div className="w-full h-2 rounded bg-gray-200 mr-2">
+              <div
+                className={`h-2 rounded ${
+                  metRules === 5
+                    ? "bg-green-500"
+                    : metRules >= 3
+                    ? "bg-yellow-400"
+                    : "bg-red-500"
+                }`}
+                style={{ width: `${(metRules / rules.length) * 100}%` }}
+              />
+            </div>
+            <span
+              className={`text-sm font-medium ${
+                metRules === 5
+                  ? "text-green-500"
+                  : metRules >= 3
+                  ? "text-yellow-500"
+                  : "text-red-500"
+              }`}
             >
-              {rule.isValid ? rule.success : rule.error}
-            </p>
-          ))}
-        </div>
+              {strengthLabel}
+            </span>
+          </div>
+
+          <div className="text-sm space-y-1">
+            {rules.map((rule, index) => (
+              <p
+                key={index}
+                className={rule.isValid ? "text-green-500" : "text-red-500"}
+              >
+                {rule.isValid ? rule.success : rule.error}
+              </p>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
